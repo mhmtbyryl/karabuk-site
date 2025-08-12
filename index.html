@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Karabük Röportaj ve Hediye Çarkı</title>
+  <title>Karabük Hediye Kartları</title>
   <style>
     * {
       box-sizing: border-box;
@@ -75,107 +75,12 @@
     }
 
     .back {
-      background: #f44336;
+      background: #4CAF50;
       color: white;
       transform: rotateY(180deg);
       user-select: none;
       overflow-wrap: break-word;
       line-height: 1.2;
-    }
-
-    h2 {
-      font-size: 36px;
-      margin-top: 60px;
-      font-weight: 700;
-    }
-
-    #pointer {
-      width: 0;
-      height: 0;
-      border-left: 25px solid transparent;
-      border-right: 25px solid transparent;
-      border-top: 40px solid #000;
-      margin: 0 auto;
-      position: relative;
-      top: 25px;
-      z-index: 10;
-    }
-
-    #wheel-container {
-      width: 480px;
-      height: 480px;
-      margin: 50px auto 0;
-      position: relative;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      border-radius: 50%;
-      background: #222;
-    }
-
-    #wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 12px solid #000;
-      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
-      overflow: hidden;
-      position: relative;
-      box-shadow: inset 0 0 30px rgba(255,255,255,0.2);
-    }
-
-    .segment {
-      position: absolute;
-      width: 50%;
-      height: 50%;
-      left: 50%;
-      top: 50%;
-      transform-origin: 0% 0%;
-      background: hsl(calc(var(--i) * 7.2), 80%, 60%);
-      transform: rotate(calc(var(--i) * 7.2deg)) skewY(-84deg);
-      clip-path: polygon(0 0, 100% 0, 100% 100%);
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 12px;
-      font-size: 12px;
-      font-weight: 700;
-      color: white;
-      user-select: none;
-      white-space: nowrap;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      pointer-events: none;
-      border-right: 1px solid black;
-      box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
-    }
-
-    button {
-      margin-top: 25px;
-      padding: 15px 30px;
-      font-size: 20px;
-      font-weight: 700;
-      background-color: #ff5757;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 5px 10px rgba(255,87,87,0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #e04141;
-    }
-
-    #result {
-      font-size: 28px;
-      font-weight: 700;
-      color: darkgreen;
-      margin-top: 25px;
-      min-height: 50px;
-      min-width: 320px;
-      margin-left: auto;
-      margin-right: auto;
-      user-select: none;
     }
 
     @media (max-width: 1100px) {
@@ -194,85 +99,17 @@
         gap: 10px;
         max-width: 100%;
       }
-      #wheel-container {
-        width: 320px;
-        height: 320px;
-      }
-      #pointer {
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-top: 25px solid #000;
-        top: 15px;
-      }
-      button {
-        font-size: 16px;
-        padding: 12px 24px;
-      }
-      #result {
-        font-size: 20px;
-        min-width: auto;
-      }
-    }
-
-    /* Pointer shake animation */
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      20%, 60% { transform: rotate(-10deg); }
-      40%, 80% { transform: rotate(10deg); }
-    }
-
-    #pointer.shake {
-      animation: shake 0.5s ease-in-out 3;
     }
   </style>
 </head>
 <body>
 
-  <h1>SORU CEVAP</h1>
+  <h1>HEDİYE KARTLARI</h1>
   <div class="cards-container" id="cardContainer"></div>
 
-  <h2>HEDİYE ÇARKI</h2>
-  <div id="pointer"></div>
-  <div id="wheel-container">
-    <div id="wheel"></div>
-  </div>
-
-  <button onclick="spinWheel()">Çevir!</button>
-  <div id="result"></div>
-
-  <audio id="spinSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_4e4faff739.mp3"></audio>
   <audio id="cardFlipSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_5b3e4c3d38.mp3"></audio>
 
   <script>
-    const questions = [
-      "Karabük'ün tarihçesi nedir?", "Şehirde en çok ziyaret edilen yer neresi?",
-      "Karabük'ün en meşhur yemeği hangisidir?", "Şehirde hangi kültürel etkinlikler düzenleniyor?",
-      "Karabük'ün doğal güzellikleri nelerdir?", "Sanayi açısından Karabük'ün önemi nedir?",
-      "Şehrin eğitim kurumları hakkında ne düşünüyorsunuz?", "Karabük'te yaşam kalitesi nasıl?",
-      "Şehirde ulaşım imkanları yeterli mi?", "Karabük'ün turizm potansiyeli nedir?",
-      "Şehirde gençler için hangi imkanlar var?", "Karabük'ün ekonomik durumu hakkında bilgi verir misiniz?",
-      "Karabük'te en beğendiğiniz yer neresi?", "Şehirde spor faaliyetleri nasıl organize ediliyor?",
-      "Karabük'te geleneksel el sanatları nelerdir?", "Şehrin sosyal yaşamı hakkında ne düşünüyorsunuz?",
-      "Karabük'ün iklimi nasıldır?", "Şehirde sağlık hizmetleri yeterli mi?",
-      "Karabük'te tarihi yapıların korunması nasıl sağlanıyor?", "Şehirde kültürlerarası etkileşim var mı?",
-      "Karabük'ün geleceği hakkında umutlu musunuz?", "Şehirde iş imkanları nasıl?",
-      "Karabük'te sanat galerileri veya müzeler var mı?", "Şehrin mimari özellikleri nelerdir?",
-      "Karabük'ün yerel festivalleri hangileridir?", "Şehirde eğitim olanakları nasıl?",
-      "Karabük'te kadınların sosyal yaşamdaki yeri nedir?", "Şehirde hangi diller konuşuluyor?",
-      "Karabük'te en popüler spor dalları hangileridir?", "Şehrin çevre sorunları nelerdir?",
-      "Karabük'ün ulaşım altyapısı hakkında ne düşünüyorsunuz?", "Şehirde kültürel miras nasıl yaşatılıyor?",
-      "Karabük'te genç girişimcilik destekleniyor mu?", "Şehirde en çok hangi meslek grupları çalışıyor?",
-      "Karabük'ün en eski yerleşim alanları neresi?", "Şehirde turistler için hangi aktiviteler mevcut?",
-      "Karabük'te konut fiyatları nasıl?", "Şehrin nüfus yapısı hakkında bilgi verir misiniz?",
-      "Karabük'te çocuklar için oyun alanları yeterli mi?", "Şehirde kamu hizmetleri ne durumda?",
-      "Karabük'te ulaşım araçları arasında en çok tercih edilen nedir?", "Şehrin en önemli tarihi olayları nelerdir?",
-      "Karabük'te çevre koruma çalışmaları yapılıyor mu?", "Şehirde en çok hangi tarım ürünleri yetişiyor?",
-      "Karabük'te kültürel çeşitlilik var mı?", "Şehirde en çok tercih edilen konut tipi nedir?",
-      "Karabük'te yerel halkın en çok gurur duyduğu şey nedir?", "Şehirde sosyal sorumluluk projeleri yürütülüyor mu?",
-      "Karabük'te ulaşımda yaşanan sorunlar nelerdir?", "Şehirde eğitim ve öğretim kalitesi hakkında ne düşünüyorsunuz?",
-      "Karabük'te yaşam maliyeti nasıldır?"
-    ];
-
     const gifts = [
       "Kol Saati", "Sinema Bileti", "Kuaför Bakımı", "Kitap", "Kahve Kupası", "Bluetooth Kulaklık",
       "Makyaj Seti", "Mini Speaker", "Anahtarlık", "Tiyatro Bileti", "Ajanda", "Tatlı Kutusu",
@@ -285,19 +122,17 @@
     ];
 
     const cardContainer = document.getElementById("cardContainer");
-    const wheel = document.getElementById("wheel");
-    const spinSound = document.getElementById("spinSound");
     const cardFlipSound = document.getElementById("cardFlipSound");
-    const resultDiv = document.getElementById("result");
 
     // Kartları oluştur (50 tane)
-    questions.slice(0, 50).forEach((question, index) => {
+    for (let i = 0; i < 50; i++) {
+      const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
         <div class="inner">
-          <div class="front">${index + 1}</div>
-          <div class="back">${question}</div>
+          <div class="front">${i + 1}</div>
+          <div class="back">${randomGift}</div>
         </div>
       `;
       card.addEventListener("click", () => {
@@ -306,54 +141,6 @@
         cardFlipSound.play();
       });
       cardContainer.appendChild(card);
-    });
-
-    // Çark dilimlerini oluştur (50 tane)
-    wheel.innerHTML = ""; // Temizle
-    gifts.slice(0, 50).forEach((gift, i) => {
-      const segment = document.createElement("div");
-      segment.className = "segment";
-      segment.style.setProperty("--i", i);
-      segment.textContent = gift;
-      wheel.appendChild(segment);
-    });
-
-    let rotation = 0;
-    let spinning = false;
-
-    function spinWheel() {
-      if(spinning) return;
-      spinning = true;
-
-      spinSound.currentTime = 0;
-      spinSound.play();
-
-      const spins = 5 + Math.floor(Math.random() * 3);
-      const randomAngle = Math.floor(Math.random() * 360);
-      const spinAmount = 360 * spins + randomAngle;
-
-      rotation += spinAmount;
-      wheel.style.transition = "transform 5s cubic-bezier(0.33, 1, 0.68, 1)";
-      wheel.style.transform = `rotate(${rotation}deg)`;
-
-      resultDiv.textContent = "";
-
-      setTimeout(() => {
-        const degrees = rotation % 360;
-        const segmentAngle = 360 / gifts.length;
-        let index = Math.floor((360 - degrees) / segmentAngle) % gifts.length;
-        resultDiv.textContent = `🎁 Kazandığınız Hediye: ${gifts[index]}`;
-        spinning = false;
-
-        // Pointer'a shake animasyonu ekle
-        const pointer = document.getElementById("pointer");
-        pointer.classList.add("shake");
-
-        // Animasyon bittikten sonra sınıfı kaldır
-        pointer.addEventListener("animationend", () => {
-          pointer.classList.remove("shake");
-        }, { once: true });
-      }, 5000);
     }
   </script>
 </body>
